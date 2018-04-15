@@ -1,6 +1,7 @@
 public class CustomStackNode<T> {
 
     private Entry<T> current;
+    private int size = 0;
 
     static private class Entry<T>{
 
@@ -20,11 +21,14 @@ public class CustomStackNode<T> {
         current = new Entry<>();
     }
 
-
+    public int size(){
+        return size;
+    }
 
     public void push(T element){
         current.next = new Entry<>(element, current);
         current = current.next;
+        size++;
     }
 
     public T pull(){
@@ -35,6 +39,8 @@ public class CustomStackNode<T> {
     public T pop(){
         T element = current.element;
         current = current.prev;
+        current.next = null;
+        size--;
         return element;
     }
 }
